@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+#PBS -l walltime=96:00:00
+#PBS -l nodes=1:ppn=1
+#PBS -l mem=4gb
+#PBS -l pmem=4gb
+
+math -script /tomerv/tomerv-shared/Sida/b-mode-log-griding/calc_GF_tensor.m $f $L $tau $n $k $kk
