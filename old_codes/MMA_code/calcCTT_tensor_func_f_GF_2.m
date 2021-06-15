@@ -36,7 +36,7 @@ optdep$rei=0.08;
 
 tabxgrid=(Import[workdir<>"xgrid_HD.dat","Table"]//Flatten);
 (*xgrid=tabxgrid[[1;;-11;;10]];*)
-xgrid=tabxgrid[[1;;-11;;10]];
+xgrid=tabxgrid[[1;;-31;;30]];
 
 tabatau=Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_a_tau.dat","Table"];
 tabaptau=Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_ap_tau.dat","Table"];
@@ -69,4 +69,4 @@ Print[i," ",xgrid[[i]]," ",func[xgrid[[i]]]]
 
 ans=({#,func[#]}&/@xgrid)~Join~{{N[τ0,10],0}};
 
-Export[dumpdir<>"ll_"<>$CommandLine[[-2]]<>"_kk_"<>$CommandLine[[-1]]<>".dat",ans];
+Export[dumpdir<>"ll_"<>$CommandLine[[-2]]<>"_kk_"<>$CommandLine[[-1]]<>"_2.dat",ans];
