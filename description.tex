@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+
+\def\GeV{\mathrm{GeV}}
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\bv}[1]{{\bf #1}}
+\newcommand{\SL}[1]{{\color{red} SL: \ #1}}
+
+\geometry{left=1.5cm,right=1.5cm,top=3cm,bottom=3cm}
+\linespread{1.1}
+\setlength{\parskip}{1em}
+
+\title{\vspace{-1.5cm}CMB B-mode Sourced by a Slow-Rolling Axion Field}
+\date{}
+
+\begin{document}
+%\maketitle\vspace{-1.5cm}
+
+\subsection*{file organization}
+The datas of the previous project are organized as follow:
+\begin{itemize}\itemsep0em
+\item The datas are stored in a folder named \bv{f\_\#\_L\_\#\_tau\_1\_N\_\#\_kmax\_\#\_nat\_tau}, inside which contains the folders \bv{ndsolve}, \bv{parameters}, \bv{GF\_new}, \bv{ClBB\_rei\_accurate}, \bv{ClTT\_rei\_scalar\_matter} and \bv{ClTT\_rei\_tensor}, and also a \textit{parameters.mx} file (which is easier to read for Mathematica) containing some parameters of this benchmark model.
+\item The \bv{ndsolve} folder contains the solved axion field and gauge modes and their conformal time derivatives.
+\item The \bv{parameters} folder has the time grid information of the solved axion field/gauge modes and the discretized k-mode.
+\item The \bv{GF\_new} folder contains the Green's function for the tensor mode calculations.
+\item The remaining three folders, as can be seen from their names, contains the results of the B-mode, anisotropy from scalar and tensor modes respectively. Each of them has a \bv{func\_f\_\#} folder containing the $f$ functions (defined in the paper) of the corresponding mode, and a bunch of \bv{uu\_\#} folder containing the results of a certain momentum $k$ (the \# in the folder name is the index of the $k$-mode).
+\end{itemize}
+
+\subsection*{supporting codes and data}
+\begin{itemize}\itemsep0em
+\item {\bf tab\_a\_tau.dat, tab\_ap\_tau.dat, tab\_appoa\_tau.dat, tab\_aH\_tau.dat}\quad Lists of $a(\tau)$, $a^\prime(\tau)$, $a^{\prime\prime}/a$ and $aH$.
+\item {\bf ndsolve\_qua\_natural\_true\_tau.m}\quad The code solving for the mode functions. The parameters used for evaluation is dumped into {\it parameter.mx} for later use.
+\item {\bf extract\_grid\_tau.m}\quad To extract the $\tau$-grids of the solved mode function. Also dump some other parameters in plain text.
+\item {\bf extract\_vprime.m}\quad To extract the conformal time derivatives of the gauge modes.
+\item {\bf calc\_GF\_tensor.m}\quad Calculating the Green function $G(k,\tau,\tau^\prime)$ which is used in the tensor mode calculations (see the other notes). The function $G$ has the boundary conditions $G(k,\tau^\prime,\tau^\prime)=0$ and $G^\prime(k,\tau^\prime,\tau^\prime)=1$. Instead of numerically solving for $G$ at every $\tau^\prime$, we solve for two GFs $G_1$ and $G_2$ with a fixed boundary $\tau^\prime=\tau_{\rm osc}$, which has the boundary conditions $G_{1(2)}(k,\tau^\prime,\tau^\prime)=0(1)$ and $G_{1(2)}^\prime(k,\tau^\prime,\tau^\prime)=1(0)$ respectively. Then $G$ can be expressed as
+\begin{align}
+G(k,\tau,\tau^\prime)=G_2(k,\tau^\prime)G_1(k,\tau)-G_1(k,\tau^\prime)G_2(k,\tau)\,. 
+\end{align}
+It can be shown that $G_2(k,\tau)G^\prime_1(k,\tau)-G_1(k,\tau)G^\prime_2(k,\tau)\equiv 1$, which make the $G^\prime$ boundary condition work.
+\end{itemize}
+
+\subsection*{codes for B-mode}
+\begin{itemize}\itemsep0em
+\item {\bf calcCBB\_func\_f\_GF.m} \quad Calculating the function (see the ClBB note+the Fourier note)
+\begin{align}
+f(k,\tau^\prime)=\int^{\tau_{\rm rei}}_{\tau^\prime}d\tau\dfrac{1}{a}\mc{G}(k,\tau,\tau^\prime)\dfrac{j_2[k(\tau_{\rm rei}-\tau)]}{k^2(\tau_{\rm rei}-\tau)^2}\,,
+\end{align}
+as a function of $k$ and $\tau^\prime$.
+\item {\bf calcCBB\_rei\_accurate\_GF.m}\quad Calculating the B-mode spectrum as a function of $k$ and $q$, with the function $f$ calculate above (See the Fourier note).
+\item {\bf collectCBB\_rei\_accurate\_GF.m}\quad Summing the result from the code above over $k$ and $q$.
+\end{itemize}
+
+\subsection*{codes for tensor T-mode}
+\begin{itemize}\itemsep0em
+\item {\bf calcCTT\_tensor\_func\_f\_GF\_2.m}\quad Calculating the corresponding function $f_l$ for the tensor TT-spectrum (as above, but with $j_2\to j_l$ and $\tau_{\rm rei}\to\tau_0$). The suffix ``\_2'' is a version label.
+\item {\bf calcCTT\_rei\_uncut\_tensor\_GF\_2.m}\quad Similar to the B-mode case, calculating the tensor TT-spectrum as a function of $k$ and $q$.
+\item {\bf collectCTT\_rei\_tensor\_GF.m}\quad Summing the result from the code above over $k$ and $q$.
+\end{itemize}
+
+\subsection*{codes for scalar T-mode}
+\begin{itemize}\itemsep0em
+%\item {\bf calcCTT\_scalar\_func\_h\_new.m}\quad With the correct $a(\tau)$ (instead of the MD approximated one in the ClTT note), the expression of scalar perturbation now writes
+%\begin{align}
+%\Phi=\exp\left(-\int^\tau_{\tau_{\rm osc}}d\tau^\prime\dfrac{k^2a^2+3a^{\prime2}}{3aa^\prime}\right)\int^\tau_{\tau_{\rm osc}}d\tau^\prime \exp\left(\int^{\tau^\prime}_{\tau_{\rm osc}}dt^{\prime\prime}\dfrac{k^2a^2+3a^{\prime2}}{3aa^\prime}\right)\dfrac{a}{3a^\prime}g(\tau^\prime)\,.
+%\end{align}
+%Defining
+%\begin{align}
+%h(\tau^\prime)=\int^{\tau^\prime}_{\tau_{\rm osc}}d\tau \dfrac{k^2a^2+3a^{\prime2}}{3aa^\prime}\,,
+%\end{align}
+%we now have
+%\begin{align}
+%\Phi=\int^\tau_{\tau_{\rm osc}}d\tau^\prime\exp\left[h(\tau^\prime)-h(\tau)\right]\dfrac{a}{3a^\prime}g(\tau^\prime)\,.
+%\end{align}
+%This piece of code calculates $h$ as a function of $\tau^\prime$.
+\item {\bf calcCTT\_scalar\_func\_f\_matter.m}\quad To calculate the corresponding function $f_l$ for the scalar TT-spectrum, after including the matter component.
+%\item {\bf calcCTT\_scalar\_func\_f\_new.cpp}\quad With the modification of $\Phi$ mentioned above, in the ClTT note the Eq.(7) and (8) now have the modification
+%\begin{align}
+%\dfrac{1}{6}\tau\, j_l[k(\tau_0-\tau)]-\tau^3f_l(k,\tau)\longrightarrow \dfrac{1}{3aa^\prime}\left(j_l[k(\tau_0-\tau)]-f_l(k,\tau)\right)\vspace{2mm}\\ 
+%f_l(k,\tau^\prime)=\int^{\tau_0}_{\tau^\prime}d\tau \exp\left[h(\tau^\prime)-h(\tau)\right]\dfrac{k^2a^2+3a^{\prime2}}{3aa^\prime}j_l[k(\tau_0-\tau)]\,.
+%\end{align}
+%This piece of code calculates the function $f_l$ as a function of $l$, $k$ and $\tau^\prime$.
+\item {\bf calcCTT\_rei\_uncut\_scalar\_matter\_correct.m}\quad With the function $f_l$ calculated above, this piece of code calculates the scalar TT spectrum as a function of $k$ and $q$.
+\item {\bf collectCTT\_rei\_scalar\_tau\_new.m}\quad Summing the results from the code above.
+\end{itemize}
+
+%\bibliographystyle{JHEP}
+%\bibliography{gaia}
+\end{document}
