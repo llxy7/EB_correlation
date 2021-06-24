@@ -7,7 +7,7 @@ pushback=ToExpression[$CommandLine[[-3]]];
 Ntot=ToExpression[$CommandLine[[-2]]];
 coeffk=ToExpression[$CommandLine[[-1]]];
 
-workdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>$CommandLine[[-5]]<>"_L_"<>$CommandLine[[-4]]<>"_tau_"<>$CommandLine[[-3]]<>"_N_"<>$CommandLine[[-2]]<>"_kmax_"<>$CommandLine[[-1]]<>"_nat_tau/ndsolve/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-5]]<>"_L_"<>$CommandLine[[-4]]<>"_tau_"<>$CommandLine[[-3]]<>"_N_"<>$CommandLine[[-2]]<>"_kmax_"<>$CommandLine[[-1]]<>"_nat_tau/ndsolve/";
 CreateDirectory[workdir]
 
 GeVtog=SetPrecision[1.783*10^-24,100];

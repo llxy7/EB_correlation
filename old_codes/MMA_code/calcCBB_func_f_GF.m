@@ -9,8 +9,8 @@ pushback=ToExpression[$CommandLine[[-5]]];
 Ntot=ToExpression[$CommandLine[[-4]]];
 coeffk=ToExpression[$CommandLine[[-3]]];
 
-workdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/parameters/";
-dumpdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClBB_rei_accurate/func_f_GF/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/parameters/";
+dumpdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClBB_rei_accurate/func_f_GF/";
 
 GeVtog=SetPrecision[1.783*10^-24,100];
 GeVtom=SetPrecision[1.973*10^-16,100];
@@ -38,8 +38,8 @@ tabxgrid=Select[(Import[workdir<>"xgrid_HD.dat","Table"]//Flatten),(#<τrei)&];
 (*xgrid=tabxgrid[[1;;-11;;10]];*)
 xgrid=SetPrecision[tabxgrid[[1;;-2;;3]],30];
 
-tabatau=Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_a_tau.dat","Table"];
-tabaptau=Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_ap_tau.dat","Table"];
+tabatau=Import["/tomerv3/Sida/b-mode-log-griding/tab_a_tau.dat","Table"];
+tabaptau=Import["/tomerv3/Sida/b-mode-log-griding/tab_ap_tau.dat","Table"];
 afit=Fit[tabatau,{1,t,t^2,t^3,t^4,t^5,t^6},t];
 apfit=Fit[tabaptau,{1,t,t^2,t^3,t^4,t^5,t^6},t];
 

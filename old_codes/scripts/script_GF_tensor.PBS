@@ -4,4 +4,4 @@
 #PBS -l mem=4gb
 #PBS -l pmem=4gb
 
-math -script /tomerv/tomerv-shared/Sida/b-mode-log-griding/calc_GF_tensor.m $f $L $tau $n $k $kk
+math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calc_GF_tensor.m $f $L $tau $n $k $kk
