@@ -10,8 +10,8 @@ pushback=ToExpression[$CommandLine[[-5]]];
 Ntot=ToExpression[$CommandLine[[-4]]];
 coeffk=ToExpression[$CommandLine[[-3]]];
 
-workdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ndsolve/";
-dumpdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClTT_rei_scalar_matter/uu_"<>$CommandLine[[-2]]<>"/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ndsolve/";
+dumpdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClTT_rei_scalar_matter/uu_"<>$CommandLine[[-2]]<>"/";
 
 GeVtog=SetPrecision[1.783*10^-24,100];
 GeVtom=SetPrecision[1.973*10^-16,100];
@@ -27,9 +27,9 @@ dk=dk[[2;;-1]];
 klist=SetPrecision[klist,100];
 dk=SetPrecision[dk,100];
 
-func$aH=Interpolation[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_aH_tau.dat","Table"]];
-func$a=Interpolation[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_a_tau.dat","Table"]];
-func$ap=Interpolation[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_ap_tau.dat","Table"]];
+func$aH=Interpolation[Import["/tomerv3/Sida/b-mode-log-griding/tab_aH_tau.dat","Table"]];
+func$a=Interpolation[Import["/tomerv3/Sida/b-mode-log-griding/tab_a_tau.dat","Table"]];
+func$ap=Interpolation[Import["/tomerv3/Sida/b-mode-log-griding/tab_ap_tau.dat","Table"]];
 
 Hz[z_]:=SetPrecision[H0*Sqrt[(1-0.3-0.3/3400)+0.3*(1+z)^3+0.3/3400*(1+z)^4],100];
 τz[zz_]:=NIntegrate[1/Hz[z],{z,zz,∞},WorkingPrecision->100];

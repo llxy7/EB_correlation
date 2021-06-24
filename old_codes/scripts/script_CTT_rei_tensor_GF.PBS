@@ -4,5 +4,5 @@
 #PBS -l mem=2gb
 #PBS -l pmem=2gb
 
-#math -script /tomerv/tomerv-shared/Sida/b-mode-log-griding/calcCTT_rei_uncut_tensor_GF.m $L $tau $n $k $uu $vv
-math -script /tomerv/tomerv-shared/Sida/b-mode-log-griding/calcCTT_rei_uncut_tensor_GF_2.m $L $tau $n $k $uu $vv
+#math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_tensor_GF.m $L $tau $n $k $uu $vv
+math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_tensor_GF_2.m $L $tau $n $k $uu $vv

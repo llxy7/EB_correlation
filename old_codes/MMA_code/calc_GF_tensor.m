@@ -6,8 +6,8 @@ pushback=ToExpression[$CommandLine[[-4]]];
 Ntot=ToExpression[$CommandLine[[-3]]];
 coeffk=ToExpression[$CommandLine[[-2]]];
 
-workdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>$CommandLine[[-6]]<>"_L_"<>$CommandLine[[-5]]<>"_tau_"<>$CommandLine[[-4]]<>"_N_"<>$CommandLine[[-3]]<>"_kmax_"<>$CommandLine[[-2]]<>"_nat_tau/parameters/";
-dumpdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>$CommandLine[[-6]]<>"_L_"<>$CommandLine[[-5]]<>"_tau_"<>$CommandLine[[-4]]<>"_N_"<>$CommandLine[[-3]]<>"_kmax_"<>$CommandLine[[-2]]<>"_nat_tau/GF_new/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-6]]<>"_L_"<>$CommandLine[[-5]]<>"_tau_"<>$CommandLine[[-4]]<>"_N_"<>$CommandLine[[-3]]<>"_kmax_"<>$CommandLine[[-2]]<>"_nat_tau/parameters/";
+dumpdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-6]]<>"_L_"<>$CommandLine[[-5]]<>"_tau_"<>$CommandLine[[-4]]<>"_N_"<>$CommandLine[[-3]]<>"_kmax_"<>$CommandLine[[-2]]<>"_nat_tau/GF_new/";
 If[DirectoryQ[dumpdir]!=True,CreateDirectory[dumpdir]];
 
 GeVtog=SetPrecision[1.783*10^-24,100];
@@ -24,7 +24,7 @@ dk=dk[[2;;-1]];
 klist=SetPrecision[klist,100];
 dk=SetPrecision[dk,100];
 
-func$appoa=Interpolation[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_appoa_tau.dat","Table"]];
+func$appoa=Interpolation[Import["/tomerv3/Sida/b-mode-log-griding/tab_appoa_tau.dat","Table"]];
 func$appoa$num[t_?NumberQ]:=func$appoa[t];
 
 Hz[z_]:=SetPrecision[H0*Sqrt[(1-0.3-0.3/3400)+0.3*(1+z)^3+0.3/3400*(1+z)^4],100];

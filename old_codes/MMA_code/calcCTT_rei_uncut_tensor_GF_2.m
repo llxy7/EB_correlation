@@ -13,8 +13,8 @@ pushback=ToExpression[$CommandLine[[-5]]];
 Ntot=ToExpression[$CommandLine[[-4]]];
 coeffk=ToExpression[$CommandLine[[-3]]];
 
-workdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ndsolve/";
-dumpdir="/tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClTT_rei_tensor/uu_"<>$CommandLine[[-2]]<>"_GF/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ndsolve/";
+dumpdir="/tomerv3/Sida/b-mode-log-griding/f_"<>ToString[log10f]<>"_L_"<>$CommandLine[[-6]]<>"_tau_"<>$CommandLine[[-5]]<>"_N_"<>$CommandLine[[-4]]<>"_kmax_"<>$CommandLine[[-3]]<>"_nat_tau/ClTT_rei_tensor/uu_"<>$CommandLine[[-2]]<>"_GF/";
 
 GeVtog=SetPrecision[1.783*10^-24,100];
 GeVtom=SetPrecision[1.973*10^-16,100];
@@ -30,8 +30,8 @@ dk=dk[[2;;-1]];
 klist=SetPrecision[klist,100];
 dk=SetPrecision[dk,100];
 
-func$aH=Interpolation[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_aH_tau.dat","Table"]];
-func$a=Interpolation[ToExpression[Import["/tomerv/tomerv-shared/Sida/b-mode-log-griding/tab_a_tau.dat","Table"]]];
+func$aH=Interpolation[Import["/tomerv3/Sida/b-mode-log-griding/tab_aH_tau.dat","Table"]];
+func$a=Interpolation[ToExpression[Import["/tomerv3/Sida/b-mode-log-griding/tab_a_tau.dat","Table"]]];
 
 Hz[z_]:=SetPrecision[H0*Sqrt[(1-0.3-0.3/3400)+0.3*(1+z)^3+0.3/3400*(1+z)^4],100];
 τz[zz_]:=NIntegrate[1/Hz[z],{z,zz,∞},WorkingPrecision->100];
@@ -49,6 +49,7 @@ lmode={700,2000};
 lmode={1000};
 lmode={500,1000};
 lmode={50,80,100,300};
+lmode={2,5,8,10,30,2000};
 
 xgridfull=Import[workdir<>"../parameters/xgrid_HD.dat","Table"];
 xgrid=xgridfull[[1;;-11;;10]]~Join~{xgridfull[[-1]]};
@@ -92,5 +93,5 @@ ans[[lind]]+=calcClTT[lind,ww]
 (* 4 for l=2000 *)
 (* for BM1, 3 for ll=700 2000 *)
 (* 5 for l=1000 *)
-Export[dumpdir<>"uu_"<>$CommandLine[[-2]]<>"_vv_"<>$CommandLine[[-1]]<>"_4.dat",ans,"LineSeparators"->" "];
+Export[dumpdir<>"uu_"<>$CommandLine[[-2]]<>"_vv_"<>$CommandLine[[-1]]<>"_6.dat",ans,"LineSeparators"->" "];
 

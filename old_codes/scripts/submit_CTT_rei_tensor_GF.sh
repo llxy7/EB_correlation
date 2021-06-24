@@ -15,11 +15,11 @@ MaxJobNum=$((Ntot*Ntot))
 
 Nsubmitted=0
 
-mkdir -p f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor
+mkdir -p /tomerv3/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor
 
 for((uu=1;uu<=Ntot;uu++))
 do
-        mkdir -p f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF
+        mkdir -p /tomerv3/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF
 done
 
 while((Nsubmitted<MaxJobNum))
@@ -37,7 +37,7 @@ do
                	#tmp=$((uu-vv>0 ? uu-vv : vv-uu));
                	#for((ww=$((tmp>1 ? tmp : 1));ww<=$((uu+vv<Ntot ? uu+vv : Ntot));ww++))
                	#do
-		qsub -q tomerv -N uu_${uu}_vv_${vv} /tomerv/tomerv-shared/Sida/b-mode-log-griding/script_CTT_rei_tensor_GF.PBS -v "f=$1, L=$2, tau=$3, n=$4, k=$5, uu=${uu}, vv=${vv}" -e /tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF/uu_${uu}_vv_${vv}.e -o /tomerv/tomerv-shared/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF/uu_${uu}_vv_${vv}.o
+		qsub -q tomerv -N uu_${uu}_vv_${vv} /tomerv3/Sida/b-mode-log-griding/code/old_codes/scripts/script_CTT_rei_tensor_GF.PBS -v "f=$1, L=$2, tau=$3, n=$4, k=$5, uu=${uu}, vv=${vv}" -e /tomerv3/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF/uu_${uu}_vv_${vv}.e -o /tomerv3/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5"_nat_tau/ClTT_rei_tensor/uu_${uu}_GF/uu_${uu}_vv_${vv}.o
                 #done
 	done
 	((Nsubmitted+=Ntosubmit))
