@@ -50,17 +50,8 @@ vivvpp=Interpolation[Import[workdir<>"vipp"<>ToString[vv+1]<>".dat","Table"]];
 vrwwpp=Interpolation[Import[workdir<>"vrpp"<>ToString[uu+1]<>".dat","Table"]];
 viwwpp=Interpolation[Import[workdir<>"vipp"<>ToString[uu+1]<>".dat","Table"]];
 
-lmode=Table[i,{i,2,9}]~Join~Table[10i,{i,1,10}];
-lmode={2,3,5,8,10,20,30,50,70,100};
-lmode={200,300,500};
-lmode={800};
-(*
-lmode={200,300,400,500};
-lmode={70,80,90,100};
-lmode=Table[i,{i,2,9}]~Join~Table[10i,{i,1,10}]~Join~Table[100 i, {i,2,5}];
-lmode={600,700};
-lmode={2000};
-*)
+lmode={2,5,8,10,30,50,80,100,300,500};
+
 ans=Table[0,Length[lmode]];
 wwmin=FirstPosition[klist,SelectFirst[klist,#>=Abs[klist[[uu]]-klist[[vv]]]&]][[1]];
 wwmax=FirstPosition[klist,SelectFirst[Reverse[klist],#<=(klist[[uu]]+klist[[vv]])&]][[1]];
@@ -94,4 +85,4 @@ ans+=2048π^7 G^2 (klist[[uu]]dk[[uu]]klist[[vv]]dk[[vv]]klist[[ww]]dk[[ww]])/(4
 (* 2 for ll=200 300 500 *)
 (* 3 for ll=800 *)
 (* 4 for ll=2000 *)
-Export[dumpdir<>"uu_"<>$CommandLine[[-2]]<>"_vv_"<>$CommandLine[[-1]]<>"_correct_3.dat",ans,"LineSeparators"->" "];
+Export[dumpdir<>"uu_"<>$CommandLine[[-2]]<>"_vv_"<>$CommandLine[[-1]]<>"_correct.dat",ans,"LineSeparators"->" "];

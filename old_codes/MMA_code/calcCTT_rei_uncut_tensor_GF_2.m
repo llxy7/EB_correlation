@@ -50,6 +50,7 @@ lmode={1000};
 lmode={500,1000};
 lmode={50,80,100,300};
 lmode={2,5,8,10,30,2000};
+lmode={2,5,8,10,30,50,80,100,300,500,800,1000,2000};
 
 xgridfull=Import[workdir<>"../parameters/xgrid_HD.dat","Table"];
 xgrid=xgridfull[[1;;-11;;10]]~Join~{xgridfull[[-1]]};

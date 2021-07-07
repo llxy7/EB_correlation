@@ -10,7 +10,8 @@ mkdir -p /tomerv3/Sida/b-mode-log-griding/f_"$1"_L_"$2"_tau_"$3"_N_"$4"_kmax_"$5
 #for ll in 700 2000
 #for ll in 500 1000
 #for ll in 2 2000
-for ll in 2 5 8 10 30 2000
+#for ll in 2 5 8 10 30 50 80
+for ll in 100 300 500 800 1000 2000
 do
 	for((kk=1;kk<=$4;kk++))
 	do
