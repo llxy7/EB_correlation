@@ -7,7 +7,7 @@ pushback=ToExpression[$CommandLine[[-3]]];
 Ntot=ToExpression[$CommandLine[[-2]]];
 coeffk=ToExpression[$CommandLine[[-1]]];
 
-workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-5]]<>"_L_"<>$CommandLine[[-4]]<>"_tau_"<>$CommandLine[[-3]]<>"_N_"<>$CommandLine[[-2]]<>"_kmax_"<>$CommandLine[[-1]]<>"_nat_tau/ClTT_rei_scalar_matter/";
+workdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-5]]<>"_L_"<>$CommandLine[[-4]]<>"_tau_"<>$CommandLine[[-3]]<>"_N_"<>$CommandLine[[-2]]<>"_kmax_"<>$CommandLine[[-1]]<>"_nat_tau/ClTT_rei_tensor/";
 dumpdir="/tomerv3/Sida/b-mode-log-griding/f_"<>$CommandLine[[-5]]<>"_L_"<>$CommandLine[[-4]]<>"_tau_"<>$CommandLine[[-3]]<>"_N_"<>$CommandLine[[-2]]<>"_kmax_"<>$CommandLine[[-1]]<>"_nat_tau/";
 
 GeVtog=SetPrecision[1.783*10^-24,100];
@@ -34,42 +34,33 @@ tmax=5*τrei;
 optdep$rei=0.08;
 
 lmode=Table[i,{i,2,9}]~Join~Table[10i,{i,1,10}];
-lmode={2,3,5,8,10,20,30,50,70,100};
-lmode={200,300,500};
-lmode={800};
-(*
 lmode={200,300,400,500};
-lmode={70,80,90,100};
 lmode={600,700};
 lmode={2000};
-*)
-lmode={2,5,8,10,30,50,80,100,300,500};
+lmode={700,2000};
+lmode={1000};
+lmode={500,1000};
+lmode={50,80,100,300};
+lmode={2,5,8,10,30,2000};
+lmode={2,5,8,10,30,50,80,100,300,500,800,1000,2000};
 
 ans=Table[0,Length[lmode]];
-ans2=Table[0,Length[lmode]];
-ans3=Table[0,Length[lmode]];
 
 allnum=Table[True,Length[lmode]];
 
-For[uu=1,uu<=Ntot,uu++,
+For[uu=1,uu<=Ntot(*uu<=93*),uu++,
 ans2=Table[0,Length[lmode]];
 For[vv=1,vv<=Ntot,vv++,
-impt1=Import[workdir<>"uu_"<>ToString[uu]<>"/uu_"<>ToString[uu]<>"_vv_"<>ToString[vv]<>"_correct.dat","Table"];
-If[impt1==$Failed, Print[ToString[uu]<>" "<>ToString[vv]];Continue[]];
-impt1=Flatten[impt1];
-If[(NumberQ[#]&/@impt1)!=allnum,Print["not number "<>ToString[uu]<>" "<>ToString[vv]];Continue[]];
-ans+=Flatten[impt1];
-ans2+=Flatten[impt1];
+tab=Import[workdir<>"uu_"<>ToString[uu]<>"_GF/uu_"<>ToString[uu]<>"_vv_"<>ToString[vv]<>"_6.dat","Table"];
+If[tab==$Failed,Continue[]];
+tab=Flatten[tab];
+If[NumberQ[#]&/@tab != allnum,Print["not num: ",uu," ",vv];Continue[]];
+ans2+=tab;
+ans+=tab;
 ];
 Print[uu," ",ans2];
 ]
 Print[ans]
-Print[MapThread[{#1,#1*(#1+1)*#2/(2 Pi)}&,{lmode,ans}]]
-
-TT=10^40;
-
-(* 2 for l=200 300 500 *)
-(* 3 for l=800 *)
-(* 5 for l=2000 *)
-Export[dumpdir<>"ClTT_rei_scalar_matter_correct.dat",MapThread[{#1,#1*(#1+1)*#2/(2 Pi)}&,{lmode,ans}]]
-
+(* for BM1, 3 for ll=700 2000 *)
+(* 5 for ll=1000 *)
+Export[dumpdir<>"ClTT_rei_tensor_GF_6.dat",MapThread[{#1,((#1-1)*#1*(#1+1)*(#1+2))#1*(#1+1)*#2/(2 Pi)}&,{lmode,ans}]]

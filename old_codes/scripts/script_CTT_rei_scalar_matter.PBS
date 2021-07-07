@@ -1,9 +1,9 @@
 #!/usr/bin/bash
-#PBS -l walltime=24:00:00
+#PBS -l walltime=72:00:00
 #PBS -l nodes=1:ppn=1
 #PBS -l mem=2gb
 #PBS -l pmem=2gb
 
-#math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m $L $tau $n $k $uu $vv
-math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m -10.36 1 100 6 $uu $vv
-math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m -10.7 1 100 5 $uu $vv
+math11.2 -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m $L $tau $n $k $uu $vv
+#math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m -10.36 1 100 6 $uu $vv
+#math -script /tomerv3/Sida/b-mode-log-griding/code/old_codes/MMA_code/calcCTT_rei_uncut_scalar_matter_correct.m -10.7 1 100 5 $uu $vv
